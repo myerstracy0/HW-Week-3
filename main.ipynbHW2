@@ -1,0 +1,198 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from pathlib import Path\n",
+    "import csv\n",
+    "import os\n",
+    " \n",
+    "net_change = 0\n",
+    "average_change = 0\n",
+    "sum_changes = 0\n",
+    "greatest_increase = 0\n",
+    "greatest_decrease = 0\n",
+    "total_month = 0\n",
+    "greatest_date = 0\n",
+    "worst_date = 0\n",
+    "net_change_list = []\n",
+    "months = []\n",
+    "\n",
+    "csv_path = Path(\"budget_data.csv\")\n",
+    "\n",
+    "with open(csv_path, 'r') as data:\n",
+    "    \n",
+    "    reader = csv.reader(data)\n",
+    "    header = next(reader)\n",
+    "    curr_month = None\n",
+    "    prev_month = None\n",
+    "    \n",
+    "    for row in reader:\n",
+    "        curr_month = row\n",
+    "        if prev_month is None:\n",
+    "            prev_month = curr_month\n",
+    "        else:\n",
+    "            net_change = int(curr_month[1]) - int(prev_month[1])\n",
+    "            months.append(curr_month[0])\n",
+    "            net_change_list.append(net_change)\n",
+    "        prev_month = curr_month\n",
+    "    \n",
+    "    #use net change list and the monthslist\n",
+    "    total_months = len(months)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 38,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "sum_changes = sum(net_change_list)\n",
+    "average_change = round((sum_changes / (total_months -1)),2)\n",
+    "greatest_increase = max(net_change_list)\n",
+    "greatest_increase_index = net_change_list.index(greatest_increase)\n",
+    "greatest_decrease = min(net_change_list)\n",
+    "greatest_decrease_index = net_change_list.index(greatest_decrease)\n",
+    "worst_date = months[greatest_decrease_index]\n",
+    "greatest_date = months[greatest_date_index]\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Financial Analysis\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(\"Financial Analysis\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "total Months:85\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(f\"total Months:{str(total_months)}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Total:$-2342.68\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(f\"Total:${str(average_change)}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Average Change:$-2342.68\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(f\"Average Change:${str(average_change)}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 53,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Greatest Increase in Profits: 0 ($0)\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(f\"Greatest Increase in Profits: {greatest_date} (${str(greatest_increase)})\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Greatest Decrease in Profits: 0 ($0)\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(f\"Greatest Decrease in Profits: {worst_date} (${str(greatest_decrease)})\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "with open(\"File,txt\",\"w\")as outfile:\n",
+    "    outfile.write(\"Financial Analysis\\n\")\n",
+    "    outfile.write(\"------------------\\n\")"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.3"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
